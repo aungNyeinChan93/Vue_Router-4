@@ -23,17 +23,17 @@
                                 class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                                 <span class="absolute -inset-1.5" />
                                 <span class="sr-only">View notifications</span>
-                                <BellIcon class="size-6" aria-hidden="true" />
+                                <!-- <BellIcon class="size-6" aria-hidden="true" /> -->
                             </button>
 
                             <!-- Profile dropdown -->
                             <Menu as="div" class="relative ml-3">
                                 <div>
                                     <MenuButton
-                                        class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                                        class=" relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                                         <span class="absolute -inset-1.5" />
                                         <span class="sr-only">Open user menu</span>
-                                        <img class="size-8 rounded-full" :src="user.imageUrl" alt="" />
+                                        <img class="size-4 rounded-full " :src="user.imageUrl" alt="" />
                                     </MenuButton>
                                 </div>
                                 <transition enter-active-class="transition ease-out duration-100"
@@ -126,6 +126,10 @@ const user = {
 const navigation = [
     { name: 'Home', to: { name: 'home' } },
     // { name: 'About', to: { name: 'about' } },
+    { name: 'Brazil', to: { name: 'brazil' } },
+    { name: 'Panama', to: { name: 'panama' } },
+    { name: 'Hawaii', to: { name: 'hawaii' } },
+    { name: 'Jamaica', to: { name: 'jamaica' } },
     { name: 'Bagan', to: { name: 'bagan' } },
     { name: 'Bankok', to: { name: 'bankok' } },
     { name: 'Hanoi', to: { name: 'hanoi' } },

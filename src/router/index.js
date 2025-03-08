@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import Master from "@/components/layouts/Master.vue";
 import AboutView from "../views/AboutView.vue";
 import Guest from "@/components/layouts/Guest.vue";
+import Test from "@/components/layouts/Test.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,22 @@ const router = createRouter({
       ],
     },
     {
+      path: "/test",
+      component: Test,
+      children: [
+        {
+          path: "/test/1",
+          name: "test-1",
+          component: () => import("@/views/TestView.vue"),
+        },
+        {
+          path: "2",
+          name: "test-2",
+          component: "",
+        },
+      ],
+    },
+    {
       path: "/",
       component: Master,
       children: [
@@ -31,6 +48,26 @@ const router = createRouter({
           path: "about",
           name: "about",
           component: AboutView,
+        },
+        {
+          path: "brazil",
+          name: "brazil",
+          component: () => import("@/views/places/BrazilView.vue"),
+        },
+        {
+          path: "panama",
+          name: "panama",
+          component: () => import("@/views/places/PanamaView.vue"),
+        },
+        {
+          path: "hawaii",
+          name: "hawaii",
+          component: () => import("@/views/places/HawaiiView.vue"),
+        },
+        {
+          path: "jamaica",
+          name: "jamaica",
+          component: () => import("@/views/places/JamaicaView.vue"),
         },
         {
           path: "bagan",
@@ -60,7 +97,10 @@ const router = createRouter({
         {
           path: "penang",
           name: "penang",
-          component: () => import("@/views/places/PenangView.vue"),
+          component: () =>
+            import(
+              /* webpackChunkName= "penang" */ "@/views/places/PenangView.vue"
+            ),
         },
         {
           path: "siargao",
@@ -72,9 +112,15 @@ const router = createRouter({
           name: "siemreap",
           component: () => import("@/views/places/SiemReapView.vue"),
         },
+        {
+          path: "destination/:id",
+          name: "destinationShow",
+          component: () => import("@/views/DestinationShow.vue"),
+        },
       ],
     },
   ],
+  linkActiveClass: "text-red-600",
 });
 
 export default router;
