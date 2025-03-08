@@ -113,14 +113,14 @@ const router = createRouter({
           component: () => import("@/views/places/SiemReapView.vue"),
         },
         {
-          path: "destination/:id",
+          path: "destination/:id/:name",
           name: "destinationShow",
           component: () => import("@/views/DestinationShow.vue"),
         },
       ],
     },
   ],
-  linkActiveClass: "text-red-600",
+  linkActiveClass: "text-red-400",
 });
 
 export default router;

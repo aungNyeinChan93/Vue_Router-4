@@ -11,8 +11,10 @@
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
-                                <RouterLink v-for="item in navigation" :key="item.name" :to="item.to"
-                                    :class="[$route.name === item.to.name ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']">
+                                <RouterLink to="/">Home</RouterLink>
+                                <RouterLink v-for="item in destinations" :key="item.name"
+                                    :to="{ name: `destinationShow`, params: { id: `${item.id}`, name: `${item.slug}` } }"
+                                    :class="[$route.name === item.slug ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']">
                                     {{ item.name }}</RouterLink>
                             </div>
                         </div>
@@ -70,8 +72,8 @@
 
             <DisclosurePanel class="md:hidden">
                 <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-                    <RouterLink v-for="item in navigation" :key="item.name" as="a" :to="item.to"
-                        :class="[$route.name === item.to.name ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']">
+                    <RouterLink v-for="item in destinations" :key="item.name" as="a" :to="item.slug"
+                        :class="[$route.name === item.slug ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']">
                         {{ item.name }}</RouterLink>
                 </div>
                 <div class="border-t border-gray-700 pt-4 pb-3">
@@ -116,6 +118,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { RouterLink, RouterView } from 'vue-router'
+import { destinations } from '@/data.json'
 
 const user = {
     name: 'Tom Cook',
@@ -123,22 +126,23 @@ const user = {
     imageUrl:
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
-const navigation = [
-    { name: 'Home', to: { name: 'home' } },
-    // { name: 'About', to: { name: 'about' } },
-    { name: 'Brazil', to: { name: 'brazil' } },
-    { name: 'Panama', to: { name: 'panama' } },
-    { name: 'Hawaii', to: { name: 'hawaii' } },
-    { name: 'Jamaica', to: { name: 'jamaica' } },
-    { name: 'Bagan', to: { name: 'bagan' } },
-    { name: 'Bankok', to: { name: 'bankok' } },
-    { name: 'Hanoi', to: { name: 'hanoi' } },
-    { name: 'Java', to: { name: 'java' } },
-    { name: 'LuangPraBang', to: { name: 'luangPrabang' } },
-    { name: 'Penang', to: { name: 'penang' } },
-    { name: 'Siargao', to: { name: 'siargao' } },
-    { name: 'Siemreap', to: { name: 'siemreap' } },
-]
+
+// const navigation = [
+//     { name: 'Home', to: { name: 'home' } },
+//     // { name: 'About', to: { name: 'about' } },
+//     { name: 'Brazil', to: { name: 'brazil' } },
+//     { name: 'Panama', to: { name: 'panama' } },
+//     { name: 'Hawaii', to: { name: 'hawaii' } },
+//     { name: 'Jamaica', to: { name: 'jamaica' } },
+//     { name: 'Bagan', to: { name: 'bagan' } },
+//     { name: 'Bankok', to: { name: 'bankok' } },
+//     { name: 'Hanoi', to: { name: 'hanoi' } },
+//     { name: 'Java', to: { name: 'java' } },
+//     { name: 'LuangPraBang', to: { name: 'luangPrabang' } },
+//     { name: 'Penang', to: { name: 'penang' } },
+//     { name: 'Siargao', to: { name: 'siargao' } },
+//     { name: 'Siemreap', to: { name: 'siemreap' } },
+// ]
 const userNavigation = [
     { name: 'Your Profile', to: { name: 'home' } },
 
