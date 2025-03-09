@@ -4,6 +4,7 @@ import Master from "@/components/layouts/Master.vue";
 import AboutView from "../views/AboutView.vue";
 import Guest from "@/components/layouts/Guest.vue";
 import Test from "@/components/layouts/Test.vue";
+import TheExperiencesCard from "@/components/layouts/TheExperiencesCard.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,16 @@ const router = createRouter({
           path: "2",
           name: "test-2",
           component: "",
+        },
+        {
+          path: "3/:name",
+          name: "test-3",
+          component: () => import("@/views/TestView.vue"),
+          props: (route) => ({
+            name: route.params.name,
+            isActive: route.params.name === "active" ? true : false,
+            query: route.query.q,
+          }),
         },
       ],
     },
@@ -116,6 +127,19 @@ const router = createRouter({
           path: "destination/:id/:name",
           name: "destinationShow",
           component: () => import("@/views/DestinationShow.vue"),
+          props: (route) => ({
+            id: Number(route.params.id),
+            name: route.params.name,
+          }),
+        },
+        {
+          path: "experienceShow/:id/:slug",
+          name: "experienceoShow",
+          component: () => import("@/views/ExperienceShowView.vue"),
+          props: (route) => ({
+            ...route.params,
+            id: Number(route.params.id),
+          }),
         },
       ],
     },

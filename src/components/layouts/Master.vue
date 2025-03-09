@@ -5,9 +5,8 @@
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <div class="shrink-0">
-                            <img class="size-8"
-                                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                                alt="Your Company" />
+                            <RouterLink :to="{ name: 'home' }" class="text-xl font-bold !text-green-400"> Travel App
+                            </RouterLink>
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
@@ -103,12 +102,17 @@
 
         <header class="bg-white shadow-sm">
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $route.name.toUpperCase() }}</h1>
+                <h1 class="text-4xl font-stretch-75% font-mono tracking-tight text-gray-900">
+                    {{ $route.params.name
+                        ? $route.params.name.toUpperCase()
+                        : $route.name.toUpperCase()
+                    }}
+                </h1>
             </div>
         </header>
         <main>
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                <RouterView />
+                <RouterView :key="$route.path" />
             </div>
         </main>
     </div>
@@ -143,6 +147,7 @@ const user = {
 //     { name: 'Siargao', to: { name: 'siargao' } },
 //     { name: 'Siemreap', to: { name: 'siemreap' } },
 // ]
+
 const userNavigation = [
     { name: 'Your Profile', to: { name: 'home' } },
 

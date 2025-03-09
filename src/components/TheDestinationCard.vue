@@ -1,6 +1,6 @@
 <script setup>
 
-defineProps({
+const props = defineProps({
     destination: Object
 })
 
@@ -18,7 +18,7 @@ defineProps({
         </div>
 
         <div class="hidden sm:block sm:basis-56">
-            <img alt="" :src="`/images/${destination.image}`" class="aspect-square h-full w-full object-cover" />
+            <img alt="" :src="`/images/${destination?.image}`" class="aspect-square h-full w-full object-cover" />
         </div>
 
         <div class="flex flex-1 flex-col justify-between">
@@ -35,7 +35,7 @@ defineProps({
             </div>
 
             <div class="sm:flex sm:items-end sm:justify-end">
-                <RouterLink :to="{ name: `${destination.slug}` }"
+                <RouterLink :to="{ name: `${destination?.slug}` }"
                     class="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400">
                     Read Blog
                 </RouterLink>

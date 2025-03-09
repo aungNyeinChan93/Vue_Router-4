@@ -8,5 +8,6 @@ const emit = defineEmits(['test:emit']);
 <template>
     <section>
         <button @click="$emit('test:emit', 'default payload')">Click</button>
+        dsfasdfa
     </section>
 </template>
