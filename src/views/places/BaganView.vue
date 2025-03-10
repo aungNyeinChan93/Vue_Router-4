@@ -3,10 +3,16 @@ import { useRoute } from 'vue-router';
 import { destinations } from '@/data.json'
 import { computed } from 'vue';
 import TheExperiencesCard from '@/components/layouts/TheExperiencesCard.vue';
+
+const props = defineProps({
+    name: { type: String }
+})
+
 const route = useRoute();
+// const routeName = computed(() => route.name)
 
 const destination = computed(() => {
-    return destinations.find(destination => destination.slug == route.name);
+    return destinations.find(destination => destination.slug == props.name);
 })
 const experiences = computed(() => destination.value.experiences);
 
@@ -15,7 +21,7 @@ const experiences = computed(() => destination.value.experiences);
 <template>
     <section>
         <div v-if="experiences">
-            <h2 class=" capitalize text-2xl font-bold py-3 underline"> experiences of {{ $route.name }} </h2>
+            <h2 class=" capitalize text-2xl font-bold py-3 underline"> experiences of {{ name }} </h2>
             <div class="grid grid-cols-4 gap-6">
                 <template v-for="exp in experiences" :key="exp">
                     <RouterLink :to="{ name: 'experienceoShow', params: { id: destination.id, slug: exp.slug } }">
@@ -24,5 +30,8 @@ const experiences = computed(() => destination.value.experiences);
                 </template>
             </div>
         </div>
+        <section class="about">
+            <RouterView />
+        </section>
     </section>
 </template>

@@ -25,7 +25,7 @@ const router = createRouter({
       component: Test,
       children: [
         {
-          path: "/test/1",
+          path: "1",
           name: "test-1",
           component: () => import("@/views/TestView.vue"),
         },
@@ -35,7 +35,7 @@ const router = createRouter({
           component: "",
         },
         {
-          path: "3/:name",
+          path: "3/:name?",
           name: "test-3",
           component: () => import("@/views/TestView.vue"),
           props: (route) => ({
@@ -43,6 +43,12 @@ const router = createRouter({
             isActive: route.params.name === "active" ? true : false,
             query: route.query.q,
           }),
+          children: [
+            {
+              path: "childRoute",
+              component: () => import("@/views/ChildTestView.vue"),
+            },
+          ],
         },
       ],
     },
@@ -84,6 +90,15 @@ const router = createRouter({
           path: "bagan",
           name: "bagan",
           component: () => import("@/views/places/BaganView.vue"),
+          props: (route) => ({
+            name: "bagan",
+          }),
+          children: [
+            {
+              path: "about",
+              component: () => import("@/views/about/BaganAboutView.vue"),
+            },
+          ],
         },
         {
           path: "bankok",
