@@ -5,10 +5,16 @@ import AboutView from "../views/AboutView.vue";
 import Guest from "@/components/layouts/Guest.vue";
 import Test from "@/components/layouts/Test.vue";
 import TheExperiencesCard from "@/components/layouts/TheExperiencesCard.vue";
+import { destinations } from "@/data.json";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/:pathMatch(.*)*",
+      name: "notFound",
+      component: () => import("@/views/NotFoundView.vue"),
+    },
     {
       path: "/guest",
       component: Guest,
@@ -17,6 +23,12 @@ const router = createRouter({
           path: "login",
           name: "login",
           component: () => import("@/views/auth/LoginView.vue"),
+          meta: { guest: true },
+          beforeEnter: (to, from, next) => {
+            if (confirm("sure?") && to.meta.guest) {
+              next();
+            }
+          },
         },
       ],
     },
@@ -146,6 +158,17 @@ const router = createRouter({
             id: Number(route.params.id),
             name: route.params.name,
           }),
+          //route guard
+          beforeEnter: (to, from, next) => {
+            const exists = destinations.find(
+              (destination) => destination.id == parseInt(to.params.id)
+            );
+            if (!exists) {
+              next({ name: "notFound" });
+            } else {
+              next();
+            }
+          },
         },
         {
           path: "experienceShow/:id/:slug",
@@ -160,6 +183,11 @@ const router = createRouter({
     },
   ],
   linkActiveClass: "text-red-400",
+});
+
+// Global route guard
+router.beforeEach((to, from) => {
+  return true;
 });
 
 export default router;
