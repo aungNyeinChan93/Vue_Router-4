@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { destinations } from '@/data.json'
 import TheDestinationCard from '@/components/TheDestinationCard.vue';
-
+import GoBack from '@/components/base/GoBack.vue';
 // const route = useRoute();
 // const route_id = computed(() => Number(route.params.id))
 
@@ -20,8 +20,8 @@ const destination = computed(() => {
 </script>
 
 <template>
-    <!-- <pre>{{ typeof id }} || {{ name }}</pre> -->
     <section>
         <TheDestinationCard :destination="destination" />
+        <GoBack class="my-4" />
     </section>
 </template>
