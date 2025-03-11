@@ -66,6 +66,15 @@ const router = createRouter({
           name: "test-4",
           component: () => import("@/views/TestLinkView.vue"),
         },
+        {
+          path: "5",
+          name: "test-5",
+          components: {
+            default: () => import("@/components/Test5/TheMain.vue"),
+            navbar: () => import("@/components/Test5/TheNavbar.vue"),
+            sidebar: () => import("@/components/Test5/TheSidebar.vue"),
+          },
+        },
       ],
     },
     {
