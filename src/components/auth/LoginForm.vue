@@ -1,11 +1,21 @@
-<template>
-    <!--
-      Heads up! 👋
-    
-      Plugins:
-        - @tailwindcss/forms
-    -->
+<script setup>
+import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
+const form = reactive({
+    username: '',
+    password: ''
+});
+const router = useRouter();
+
+const login = () => {
+    window.username = form.username;
+    router.push({ name: 'protected' })
+}
+
+</script>
+
+<template>
     <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-lg">
             <h1 class="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">Get started today</h1>
@@ -15,15 +25,15 @@
                 inventore quaerat mollitia?
             </p>
 
-            <form action="#" class="mt-6 mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+            <form @submit.prevent="login" class="mt-6 mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
                 <p class="text-center text-lg font-medium">Sign in to your account</p>
 
                 <div>
                     <label for="email" class="sr-only">Email</label>
 
                     <div class="relative">
-                        <input type="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs"
-                            placeholder="Enter email" />
+                        <input type="name" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs"
+                            v-model="form.username" placeholder="Enter UserName" />
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"
@@ -40,7 +50,7 @@
 
                     <div class="relative">
                         <input type="password" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs"
-                            placeholder="Enter password" />
+                            v-model="form.password" placeholder="Enter password" />
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"

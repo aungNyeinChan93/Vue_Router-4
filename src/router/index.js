@@ -72,6 +72,7 @@ const router = createRouter({
           path: "/",
           name: "home",
           component: HomeView,
+          meta: { title: "home" },
         },
         {
           path: "about",
@@ -179,14 +180,38 @@ const router = createRouter({
             id: Number(route.params.id),
           }),
         },
+        {
+          path: "protected",
+          name: "protected",
+          component: () => import("@/views/ProtectedView.vue"),
+          meta: { requiredsAuth: true },
+        },
       ],
     },
   ],
+
   linkActiveClass: "text-red-400",
+
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  },
 });
 
 // Global route guard
 router.beforeEach((to, from) => {
+  console.log(`this route from ${from.path} to ${to.path}`);
+  if (to.meta.title) {
+    document.title = to.meta.title.toUpperCase();
+  } else {
+    document.title = "Travel-App";
+  }
+  if (to.meta.requiredsAuth && !window.username) {
+    return { name: "login" };
+  }
   return true;
 });
 
