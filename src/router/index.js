@@ -61,6 +61,11 @@ const router = createRouter({
             },
           ],
         },
+        {
+          path: "4",
+          name: "test-4",
+          component: () => import("@/views/TestLinkView.vue"),
+        },
       ],
     },
     {
