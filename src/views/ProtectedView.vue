@@ -15,8 +15,14 @@ const username = ref(window.username)
 <template>
     <section>
         Protected View ||{{ username }}
+        <p class="container-amber text-red-400">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit suscipit
+            aliquid
+            exercitationem?
+        </p>
 
-        <button @click="logout">Logout</button>
+        <button class="btn-blue" @click="logout">Logout</button>
+
+        <RouterLink :to="{ name: 'invoices' }" class="btn-blue inline-block mx-1">Invoices</RouterLink>
     </section>
 </template>
 

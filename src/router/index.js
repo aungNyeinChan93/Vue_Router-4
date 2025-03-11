@@ -4,7 +4,6 @@ import Master from "@/components/layouts/Master.vue";
 import AboutView from "../views/AboutView.vue";
 import Guest from "@/components/layouts/Guest.vue";
 import Test from "@/components/layouts/Test.vue";
-import TheExperiencesCard from "@/components/layouts/TheExperiencesCard.vue";
 import { destinations } from "@/data.json";
 
 const router = createRouter({
@@ -44,7 +43,7 @@ const router = createRouter({
         {
           path: "2",
           name: "test-2",
-          component: "",
+          component: () => import("@/views/RouteQueryParamsView.vue"),
         },
         {
           path: "3/:name?",
@@ -186,6 +185,12 @@ const router = createRouter({
           component: () => import("@/views/ProtectedView.vue"),
           meta: { requiredsAuth: true },
         },
+        {
+          path: "invoices",
+          name: "invoices",
+          component: () => import("@/views/InvoicesView.vue"),
+          meta: { requiredsAuth: true },
+        },
       ],
     },
   ],
@@ -204,14 +209,17 @@ const router = createRouter({
 // Global route guard
 router.beforeEach((to, from) => {
   console.log(`this route from ${from.path} to ${to.path}`);
+
   if (to.meta.title) {
     document.title = to.meta.title.toUpperCase();
   } else {
     document.title = "Travel-App";
   }
+
   if (to.meta.requiredsAuth && !window.username) {
-    return { name: "login" };
+    return { name: "login", query: { redirect: to.fullPath } };
   }
+
   return true;
 });
 
