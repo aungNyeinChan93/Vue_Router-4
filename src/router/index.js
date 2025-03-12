@@ -86,6 +86,11 @@ const router = createRouter({
           name: "home",
           component: HomeView,
           meta: { title: "home" },
+          alias: "/home", // route alias
+        },
+        {
+          path: "/my-travel-app",
+          redirect: { name: "home" }, //route redirect
         },
         {
           path: "about",
@@ -172,7 +177,7 @@ const router = createRouter({
             id: Number(route.params.id),
             name: route.params.name,
           }),
-          //route guard
+          // per - route guard
           beforeEnter: (to, from, next) => {
             const exists = destinations.find(
               (destination) => destination.id == parseInt(to.params.id)
